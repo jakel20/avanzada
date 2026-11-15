@@ -1,0 +1,35 @@
+# Impide que entren a la imagen archivos que no deben estar ahí.
+# Lo crítico: las credenciales (.env) jamás deben quedar dentro de la imagen.
+
+# Credenciales y secretos
+.env
+.env.*
+!.env.example
+Credenciales*
+
+# Control de versiones
+.git
+.gitignore
+
+# Desarrollo / documentación (no se necesitan en producción)
+notebooks/
+scripts/
+pruebas.http
+.devcontainer/
+Proyecto_final_Computacion_Avanzada.pdf
+README.md
+.atl/
+
+# Cachés de Python
+# OJO: un patrón de directorio con barra final (ej. "__pycache__/")
+# solo excluye ese nombre en la RAÍZ del contexto. Para excluirlo en
+# cualquier nivel hay que prefijarlo con "**/".
+**/__pycache__/
+*.py[cod]
+**/.venv/
+**/venv/
+**/.ipynb_checkpoints/
+
+# Modelos pesados opcionales (solo sube el JSON)
+models/*.pkl
+models/*.joblib
