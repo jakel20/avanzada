@@ -4,32 +4,6 @@
 
 Servicio web que pronostica el consumo eléctrico horario de un servidor: los datos se leen de **InfluxDB 2.x**, el modelo es un **SARIMA** entrenado en **Google Colab**, la API está hecha en **FastAPI** y el servicio se empaqueta en un **contenedor Docker**.
 
----
-
-## Estado de la entrega
-
-| # | Entregable | Archivo | Estado |
-|---|---|---|---|
-| 1 | Modelo SARIMA entrenado | `models/sarima_config.json` | ✅ |
-| 2 | Notebook de entrenamiento ejecutado | `notebooks/entrenamiento_sarima_colab.ipynb` | ✅ |
-| 3 | Frontend | `frontend/index.html` | ✅ |
-| 4 | Contenedor | `Dockerfile`, `.dockerignore` | ✅ |
-| 5 | Video de sustentación | — | 🔴 **PENDIENTE** |
-
----
-
-## Video de sustentación
-
-> 🔴 **PENDIENTE — reemplazar esta línea por el enlace antes de entregar.**
->
-> Formato esperado: `https://youtu.be/XXXXXXXXXXX` (YouTube como *no listado*) o un enlace de Google Drive con permiso de lectura para el profesor. Máximo 5 minutos.
->
-> **Guion sugerido:**
-> 1. **Sin Docker:** `uvicorn app.main:app --host 0.0.0.0 --port 8000`, el frontend con datos reales, cambiar las horas a pronosticar y abrir `/api/salud` mostrando `"modelo_demo": false` y `"influx_configurado": true`.
-> 2. **Con Docker:** `docker build -t pronostico .` y `docker run ... --env-file .env`, abrir el frontend en el otro puerto, y mostrar `docker ps` junto a `/api/salud`: el **CONTAINER ID** debe ser igual a `atendido_por` y distinto del valor de la parte sin Docker.
-> 3. **Reglas:** nunca mostrar el token; terminal y navegador legibles.
-
----
 
 ## Serie utilizada
 
@@ -303,11 +277,6 @@ En PowerShell 5.1 `curl` es un alias de `Invoke-WebRequest` y no acepta las mism
 **Fase 3 — Servicio sin Docker.** Se verificó con datos reales: `/api/salud` con `"modelo_cargado": true`, `"influx_configurado": true` y `"modelo_demo": false`.
 
 **Fase 4 — Contenedor.** `docker build` sobre `python:3.12-slim`; la imagen final pesa 758 MB. La evidencia de que responde el contenedor y no el host es que el **CONTAINER ID** de `docker ps` coincide con `atendido_por` en `/api/salud`, y es distinto del valor obtenido en la Fase 3.
-
----
-
-## Material de referencia
-
 - [`pruebas.http`](pruebas.http) — peticiones de ejemplo a todos los endpoints.
 - [`scripts/probar_conexion.py`](scripts/probar_conexion.py) — lista los measurements y fields del bucket y muestra las últimas horas de la serie.
 - [`scripts/crear_modelo_demo.py`](scripts/crear_modelo_demo.py) — genera un modelo sintético para trabajar sin datos reales. Sobrescribe `models/sarima_config.json`, así que debe reemplazarse por el modelo real después de usarlo.
